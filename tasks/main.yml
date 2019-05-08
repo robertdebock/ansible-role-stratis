@@ -1,0 +1,52 @@
+---
+# tasks file for stratis
+- name: install stratis
+  package:
+    name: "{{ stratis_packages }}"
+    state: present
+  register: stratis_install_stratis
+  until: stratis_install_stratis is succeeded
+  retries: 3
+
+- name: start and enable stratis
+  service:
+    name: "{{ stratis_service }}"
+    state: started
+    enabled: yes
+  when:
+    - ansible_virtualization_type != "docker"
+
+- name: create pools
+  command: stratis pool create {{ item.name }} {{ item.devices | join(' ') }}
+  args:
+    creates: /stratis/{{ item.name }}
+  with_items:
+    - "{{ stratis_pools }}"
+  when:
+    - stratis_pools is defined
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: create filesystems
+  command: stratis fs create {{ item.pool }} {{ item.name }}
+  args:
+    creates: /stratis/{{ item.pool }}/{{ item.name }}
+  with_items:
+    - "{{ stratis_filesystems }}"
+  when:
+    - stratis_filesystems is defined
+  loop_control:
+    label: "{{ item.name }}"
+
+- name: mount filesystems
+  mount:
+    path: "{{ item.mountpoint }}"
+    src: "{{ item.device }}"
+    fstype: xfs
+    state: present
+  with_items:
+    - "{{ stratis_mounts }}"
+  when:
+    - stratis_mounts is defined
+  loop_control:
+    label: "{{ item.mountpoint }}"
