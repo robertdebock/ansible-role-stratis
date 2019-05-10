@@ -5,4 +5,15 @@
   gather_facts: yes
 
   roles:
-    - ansible-role-stratis
+    - role: ansible-role-stratis
+      stratis_pools:
+        - name: my_pool
+          devices:
+            - device1
+            - device2
+      stratis_filesystems:
+        - name: my_filesystem
+          pool: my_pool
+      stratis_mounts:
+        - mountpoint: /mnt/my_mountpoint
+          device: /stratis/my_pool/my_filesystem

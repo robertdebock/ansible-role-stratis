@@ -11,6 +11,10 @@ platforms:
   - name: stratis-fedora-latest
     image: fedora:latest
     pre_build_image: yes
+    command: /sbin/init
+    privileged: yes
+    volumes:
+      - /run/udev:/run/udev:ro
 provisioner:
   name: ansible
   playbooks:

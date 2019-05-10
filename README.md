@@ -17,7 +17,18 @@ This example is taken from `molecule/default/playbook.yml`:
   gather_facts: yes
 
   roles:
-    - robertdebock.stratis
+    - role: robertdebock.stratis
+      stratis_pools:
+        - name: my_pool
+          devices:
+            - device1
+            - device2
+      stratis_filesystems:
+        - name: my_filesystem
+          pool: my_pool
+      stratis_mounts:
+        - mountpoint: /mnt/my_mountpoint
+          device: /stratis/my_pool/my_filesystem
 ```
 
 The machine you are running this on, may need to be prepared. Tests have been done on machines prepared by this playbook:
@@ -30,6 +41,15 @@ The machine you are running this on, may need to be prepared. Tests have been do
 
   roles:
     - robertdebock.bootstrap
+
+  tasks:
+    - name: create file
+      command: dd if=/dev/zero of={{ item }} bs=512 count=1048576
+      args:
+        creates: "{{ item }}"
+      with_items:
+        - device1
+        - device2
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
@@ -41,19 +61,6 @@ These variables are set in `defaults/main.yml`:
 ```yaml
 ---
 # defaults file for stratis
-stratis_pools:
-  - name: my_pool
-    devices:
-      - /dev/sdb
-      - /dev/sdc
-
-stratis_filesystems:
-  - name: my_filesystem
-    pool: my_pool
-
-stratis_mounts:
-  - mountpoint: /mnt/my_mountpoint
-    device: /stratis/my_pool/my_filesystem
 ```
 
 Requirements

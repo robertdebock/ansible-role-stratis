@@ -1,15 +1,2 @@
 ---
 # defaults file for stratis
-stratis_pools:
-  - name: my_pool
-    devices:
-      - /dev/sdb
-      - /dev/sdc
-
-stratis_filesystems:
-  - name: my_filesystem
-    pool: my_pool
-
-stratis_mounts:
-  - mountpoint: /mnt/my_mountpoint
-    device: /stratis/my_pool/my_filesystem
