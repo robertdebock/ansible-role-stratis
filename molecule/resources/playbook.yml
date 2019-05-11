@@ -9,8 +9,8 @@
       stratis_pools:
         - name: my_pool
           devices:
-            - device1
-            - device2
+            - /dev/vdb
+            - /dev/vdc
       stratis_filesystems:
         - name: my_filesystem
           pool: my_pool

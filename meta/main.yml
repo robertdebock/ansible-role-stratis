@@ -10,22 +10,17 @@ galaxy_info:
   platforms:
     - name: EL
       version:
-        - 6
-        - 7
+        - 8
     - name: Fedora
       versions:
         - all
 
   galaxy_tags:
     - stratis
-    - alpine
-    - archlinux
+    - storage
     - centos
-    - debian
     - el
     - fedora
-    - opensuse
     - rhel
-    - ubuntu
 
 dependencies: []

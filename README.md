@@ -21,8 +21,8 @@ This example is taken from `molecule/default/playbook.yml`:
       stratis_pools:
         - name: my_pool
           devices:
-            - device1
-            - device2
+            - /device1
+            - /device2
       stratis_filesystems:
         - name: my_filesystem
           pool: my_pool
@@ -39,6 +39,11 @@ The machine you are running this on, may need to be prepared. Tests have been do
   become: yes
   gather_facts: no
 
+  vars:
+    devices:
+      - /device1
+      - /device2
+
   roles:
     - robertdebock.bootstrap
 
@@ -48,8 +53,12 @@ The machine you are running this on, may need to be prepared. Tests have been do
       args:
         creates: "{{ item }}"
       with_items:
-        - device1
-        - device2
+        - "{{ devices }}"
+
+    - name: make blockdevice
+      command: mknod {{ item }} b 45 0
+      with_items:
+        - "{{ devices }}"
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
@@ -97,7 +106,7 @@ This role has been tested against the following distributions and Ansible versio
 |alpine-latest|no|no|no*|
 |archlinux|no|no|no*|
 |centos-6|no|no|no*|
-|centos-latest|yes|yes|yes*|
+|centos-latest|no|no|no*|
 |debian-latest|no|no|no*|
 |debian-stable|no|no|no*|
 |debian-unstable*|no|no|no*|
