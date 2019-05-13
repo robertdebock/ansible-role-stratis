@@ -16,7 +16,6 @@
 
 - name: create pools
   command: stratis pool create {{ item.name }} {{ item.devices | join(' ') }}
-  register: stratis_create_pools
   args:
     creates: /stratis/{{ item.name }}
   with_items:
@@ -35,7 +34,7 @@
     - "{{ stratis_filesystems }}"
   when:
     - stratis_filesystems is defined
-    - stratis_create_pools is not skipped
+    - ansible_virtualization_type != "docker"
   loop_control:
     label: "{{ item.name }}"
 
@@ -61,6 +60,6 @@
     - "{{ stratis_mounts }}"
   when:
     - stratis_mounts is defined
-    - stratis_create_pools is not skipped
+    - ansible_virtualization_type != "docker"
   loop_control:
     label: "{{ item.mountpoint }}"
