@@ -21,8 +21,8 @@ This example is taken from `molecule/default/playbook.yml`:
       stratis_pools:
         - name: my_pool
           devices:
-            - /device1
-            - /device2
+            - /dev/vdb
+            - /dev/vdc
       stratis_filesystems:
         - name: my_filesystem
           pool: my_pool
@@ -41,24 +41,47 @@ The machine you are running this on, may need to be prepared. Tests have been do
 
   vars:
     devices:
-      - /device1
-      - /device2
+      - name: vdb
+        major: 252
+        minor: 2
+      - name: vdc
+        major: 252
+        minor: 3
 
   roles:
     - robertdebock.bootstrap
 
   tasks:
-    - name: create file
-      command: dd if=/dev/zero of={{ item }} bs=512 count=1048576
+    - name: create storage file
+      command: dd if=/dev/zero of=/{{ item.name }} bs=1M count=1K
       args:
-        creates: "{{ item }}"
+        creates: "/{{ item.name }}"
       with_items:
         - "{{ devices }}"
+      notify:
+        - create loopback device
+        - loopback device to storage file
+      loop_control:
+        label: "/{{ item.name }}"
 
-    - name: make blockdevice
-      command: mknod {{ item }} b 45 0
+  handlers:
+    - name: create loopback device
+      command: mknod /dev/{{ item.name }} b {{ item.major }} {{ item.minor }}
       with_items:
         - "{{ devices }}"
+      loop_control:
+        label: "/dev/{{ item.name }}"
+
+    - name: loopback device to storage file
+      command: losetup /dev/{{ item.name }} /{{ item.name }}
+      with_items:
+        - "{{ devices }}"
+      failed_when: no
+      register: stratis_loopback_device_to_storage_file
+      until: stratis_loopback_device_to_storage_file is succeeded
+      retries: 3
+      loop_control:
+        label: "/dev/{{ item.name }} to /{{ item.name }}"
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.

@@ -13,6 +13,8 @@
     name: "{{ stratis_service }}"
     state: started
     enabled: yes
+  when:
+    - ansible_virtualization_type != "docker"
 
 - name: create pools
   command: stratis pool create {{ item.name }} {{ item.devices | join(' ') }}
