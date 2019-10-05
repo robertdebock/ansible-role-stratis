@@ -142,7 +142,7 @@ This role has been tested against the following distributions and Ansible versio
 |alpine-edge*|no|no|no*|
 |alpine-latest|no|no|no*|
 |archlinux|yes|yes|yes*|
-|centos-7|no|no|no*|
+|centos-7|yes|yes|yes*|
 |centos-latest|no|no|no*|
 |debian-stable|no|no|no*|
 |debian-unstable*|no|no|no*|
@@ -155,6 +155,18 @@ This role has been tested against the following distributions and Ansible versio
 
 A single star means the build may fail, it's marked as an experimental build.
 
+Exceptions
+----------
+
+Some variarations of the build matrix do not work. These are the variations and reasons why the build won't work:
+
+| variation                 | reason                 |
+|---------------------------|------------------------|
+| Alpine | Stratis is not available. |
+| CentOS-7 | Stratis is not available. |
+| Debian | Stratis is not available. |
+| openSUSE Leap | Stratis is not available. |
+| Ubuntu | Stratis is not available. |
 
 
 
