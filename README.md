@@ -142,8 +142,8 @@ This role has been tested against the following distributions and Ansible versio
 |alpine-edge*|no|no|no*|
 |alpine-latest|no|no|no*|
 |archlinux|yes|yes|yes*|
-|centos-7|yes|yes|yes*|
-|centos-latest|no|no|no*|
+|centos-7|no|no|no*|
+|centos-latest|yes|yes|yes*|
 |debian-stable|no|no|no*|
 |debian-unstable*|no|no|no*|
 |fedora-latest|yes|yes|yes*|
