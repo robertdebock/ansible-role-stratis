@@ -1,14 +1,8 @@
 ---
 # vars file for stratis
-_stratis_packages:
-  default:
-    - stratisd
-    - stratis-cli
-    - xfsprogs
+stratis_packages:
+  - stratisd
+  - stratis-cli
+  - xfsprogs
 
-stratis_packages: "{{ _stratis_packages[ansible_distribution] | default(_stratis_packages['default']) }}"
-
-_stratis_service:
-  default: stratisd
-
-stratis_service: "{{ _stratis_service[ansible_distribution] | default(_stratis_service['default']) }}"
+stratis_service: stratisd
