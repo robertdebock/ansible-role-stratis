@@ -6,6 +6,9 @@ stratis
 
 Install stratis and carves pools and filesystems.
 
+<img src="https://img.shields.io/ansible/role/d/40309"/>
+<img src="https://img.shields.io/ansible/quality/40309"/>
+
 Example Playbook
 ----------------
 
@@ -110,6 +113,16 @@ The following roles can be installed to ensure all requirements are met, using `
 
 ```
 
+This role uses the following modules:
+```yaml
+---
+- command
+- file
+- mount
+- package
+- service
+```
+
 Context
 -------
 
@@ -129,7 +142,7 @@ This role has been tested against the following distributions and Ansible versio
 |alpine-edge*|no|no|no*|
 |alpine-latest|no|no|no*|
 |archlinux|yes|yes|yes*|
-|centos-6|no|no|no*|
+|centos-7|no|no|no*|
 |centos-latest|no|no|no*|
 |debian-stable|no|no|no*|
 |debian-unstable*|no|no|no*|
@@ -141,6 +154,9 @@ This role has been tested against the following distributions and Ansible versio
 |ubuntu-rolling|no|no|no*|
 
 A single star means the build may fail, it's marked as an experimental build.
+
+
+
 
 Testing
 -------
