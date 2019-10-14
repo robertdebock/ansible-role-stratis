@@ -6,8 +6,8 @@ stratis
 
 Install stratis and carves pools and filesystems.
 
-<img src="https://img.shields.io/ansible/role/d/"/>
-<img src="https://img.shields.io/ansible/quality/"/>
+<img src="https://img.shields.io/ansible/role/d/40309"/>
+<img src="https://img.shields.io/ansible/quality/40309"/>
 
 Example Playbook
 ----------------
