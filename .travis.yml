@@ -1,89 +1,51 @@
 ---
-sudo: required
 language: python
-services: docker
+
+python:
+  - "3.7"
+
+services:
+  - docker
 
 env:
-  - version=">=2.7,<2.8" distro="alpine-latest" expectation="fail"
-  - version="" distro="alpine-latest" expectation="fail"
-  - version="devel" distro="alpine-latest" expectation="fail"
-  - version=">=2.7,<2.8" distro="alpine-edge" expectation="fail"
-  - version="" distro="alpine-edge" expectation="fail"
-  - version="devel" distro="alpine-edge" expectation="fail"
-  - version=">=2.7,<2.8" distro="archlinux"
-  - version="" distro="archlinux"
-  - version="devel" distro="archlinux"
-  - version=">=2.7,<2.8" distro="centos-7" expectation="fail"
-  - version="" distro="centos-7" expectation="fail"
-  - version="devel" distro="centos-7" expectation="fail"
-  - version=">=2.7,<2.8" distro="centos-latest"
-  - version="" distro="centos-latest"
-  - version="devel" distro="centos-latest"
-  - version=">=2.7,<2.8" distro="debian-stable" expectation="fail"
-  - version="" distro="debian-stable" expectation="fail"
-  - version="devel" distro="debian-stable" expectation="fail"
-  - version=">=2.7,<2.8" distro="debian-unstable" expectation="fail"
-  - version="" distro="debian-unstable" expectation="fail"
-  - version="devel" distro="debian-unstable" expectation="fail"
-  - version=">=2.7,<2.8" distro="fedora-latest"
-  - version="" distro="fedora-latest"
-  - version="devel" distro="fedora-latest"
-  - version=">=2.7,<2.8" distro="fedora-rawhide"
-  - version="" distro="fedora-rawhide"
-  - version="devel" distro="fedora-rawhide"
-  - version=">=2.7,<2.8" distro="opensuse-leap" expectation="fail"
-  - version="" distro="opensuse-leap" expectation="fail"
-  - version="devel" distro="opensuse-leap" expectation="fail"
-  - version=">=2.7,<2.8" distro="ubuntu-rolling" expectation="fail"
-  - version="" distro="ubuntu-rolling" expectation="fail"
-  - version="devel" distro="ubuntu-rolling" expectation="fail"
-  - version=">=2.7,<2.8" distro="ubuntu-latest" expectation="fail"
-  - version="" distro="ubuntu-latest" expectation="fail"
-  - version="devel" distro="ubuntu-latest" expectation="fail"
-  - version=">=2.7,<2.8" distro="ubuntu-devel" expectation="fail"
-  - version="" distro="ubuntu-devel" expectation="fail"
-  - version="devel" distro="ubuntu-devel" expectation="fail"
+  global:
+    - namespace="robertdebock/"
+  matrix:
+    - image="docker-alpine-openrc"
+    - image="docker-alpine-openrc" tag="edge"
+    # - namespace="archlinux/" image="base"
+    - image="docker-centos-systemd" tag="7"
+    - image="docker-centos-systemd"
+    - image="docker-debian-systemd" tag="stable"
+    - image="docker-debian-systemd" tag="unstable"
+    - image="docker-debian-systemd"
+    - image="docker-fedora-systemd"
+    - image="docker-fedora-systemd" tag="rawhide"
+    - namespace="opensuse/" image="leap"
+    - image="docker-ubuntu-systemd" tag="rolling"
+    - image="docker-ubuntu-systemd" tag="devel"
+    - image="docker-ubuntu-systemd"
 
 matrix:
   allow_failures:
-    - env: version=">=2.7,<2.8" distro="alpine-edge" expectation="fail"
-    - env: version="" distro="alpine-edge" expectation="fail"
-    - env: version="devel" distro="alpine-edge" expectation="fail"
-    - env: version="devel" distro="alpine-latest" expectation="fail"
-    - env: version="devel" distro="archlinux"
-    - env: version="devel" distro="centos-7" expectation="fail"
-    - env: version="devel" distro="centos-latest"
-    - env: version="devel" distro="debian-stable" expectation="fail"
-    - env: version=">=2.7,<2.8" distro="debian-unstable" expectation="fail"
-    - env: version="" distro="debian-unstable" expectation="fail"
-    - env: version="devel" distro="debian-unstable" expectation="fail"
-    - env: version="devel" distro="fedora-latest"
-    - env: version=">=2.7,<2.8" distro="fedora-rawhide"
-    - env: version="" distro="fedora-rawhide"
-    - env: version="devel" distro="fedora-rawhide"
-    - env: version="devel" distro="opensuse-leap" expectation="fail"
-    - env: version="devel" distro="ubuntu-rolling" expectation="fail"
-    - env: version=">=2.7,<2.8" distro="ubuntu-devel" expectation="fail"
-    - env: version="" distro="ubuntu-devel" expectation="fail"
-    - env: version="devel" distro="ubuntu-devel" expectation="fail"
-    - env: version="devel" distro="ubuntu-latest" expectation="fail"
+    - env: image="docker-alpine-openrc" tag="edge"
+    - env: image="docker-debian-systemd" tag="unstable"
+    - env: image="docker-fedora-systemd" tag="rawhide"
+    - env: image="docker-ubuntu-systemd" tag="rolling"
+    - env: image="docker-ubuntu-systemd" tag="devel"
 
 cache:
   - pip
 
 install:
   - pip install --upgrade pip
-  - if [ "${version}" != "devel" ] ; then pip install ansible"${version}" ; fi
-  - if [ "${version}" = "devel" ] ; then pip install git+https://github.com/ansible/ansible.git@devel ; fi
-  - pip install molecule
-  - pip install docker
+  - pip install tox
 
 script:
-  - if [ "${expectation}" = "fail" ] ; then ! molecule test --scenario-name "${distro}" ; else molecule test --scenario-name "${distro}" ; fi
+  - tox --parallel all
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
   slack:
     secure: "bVTIJB78g+VEfJ2m3xK2fzgkQfOgExOqu/XqXfFENtCaTkBk0LPe6yaWn+IuAgq3yyW8NqdTv5HkEEiRlydspiq+qmVmt7x0417lCZeiIKpz/efsfJNWFVwfjm8G9cizIz1FncofxKq3aa0ToZp1kf9R2J0h4ZQoT9tElxvcnXeP2HUYyx/KVGT2Iyazk+Pjc68vXQKZERYDk2x1b3W2AA9+wVWYHkZ6uTAG+FSE8SvYDhRXovk8cEqv+w0k5wl38a2I83hrcp7K2od8m0xp9IA6XbRCIrG0ReGfhKHfQajW6NwPIhdyNGM+WvTGFca8oPi5AHGcnOCW/tnFLyV7Vi+vMol9eWQZa9TJt4VHCvyf4aMfH7mCororPgxckldEb+Y19kYvjNMVgN9xLT/QnNsXimzMNbh8AmNGREwrKgwdNvwKtOKrjKqvUGQt6NnA9p1Y39LWuVjbzudpEaAG8+Mqmww0R9r3+pNnOUH1PYF6FQd4ZGPRKdu3IYeEw/YXBZnSEuI8BsxBhqWy6MiCW3MkLLUvBUcb8oSss3Rxz1OoTwbxre2ptEgudhlHr6Qn/4UxOfJd9jOjCDCZbUNdB10DWU23iluR1HrhkxMT878HGmpz/X2HMCnz7yH95VCg5o4TKAznakfvpuULAlG5R3Qk6R8HQ5LTm0PkccI0zbE="
-
   email: false

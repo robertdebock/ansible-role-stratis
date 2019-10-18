@@ -8,57 +8,14 @@ lint:
 driver:
   name: docker
 platforms:
-  - name: stratis-alpine-edge
-    image: alpine:edge
-    pre_build_image: yes
-    command: sh -c "while true ; do sleep 1 ; done"
-  - name: stratis-alpine-latest
-    image: alpine:latest
-    pre_build_image: yes
-    command: sh -c "while true ; do sleep 1 ; done"
-  - name: stratis-archlinux
-    image: archlinux/base
-    pre_build_image: yes
-  - name: stratis-centos-6
-    image: centos:6
-    pre_build_image: yes
-  - name: stratis-centos-latest
-    image: centos:latest
-    pre_build_image: yes
-  - name: stratis-debian-stable
-    image: debian:stable
-    pre_build_image: yes
-  - name: stratis-debian-unstable
-    image: debian:unstable
-    pre_build_image: yes
-  - name: stratis-fedora-latest
-    image: fedora:latest
-    pre_build_image: yes
-  - name: stratis-fedora-rawhide
-    image: fedora:rawhide
-    pre_build_image: yes
-  - name: stratis-opensuse-leap
-    image: opensuse/leap
-    pre_build_image: yes
-  - name: stratis-ubuntu-latest
-    image: ubuntu:latest
-    pre_build_image: yes
-  - name: stratis-ubuntu-rolling
-    image: ubuntu:rolling
-    pre_build_image: yes
-  - name: stratis-ubuntu-devel
-    image: ubuntu:devel
+  - name: "${image:-default}-${TOX_ENVNAME:-default}"
+    image: "${namespace}${image:-docker-fedora-systemd}:${tag:-latest}"
+    command: sh -c "while true ; do sleep 30 ; done"
     pre_build_image: yes
 provisioner:
   name: ansible
   playbooks:
-    prepare: ../resources/prepare.yml
-    converge: ../resources/playbook.yml
-  inventory:
-    host_vars:
-      stratis-fedora-latest:
-        ansible_python_interpreter: /usr/bin/python3
-      stratis-fedora-rawhide:
-        ansible_python_interpreter: /usr/bin/python3
+    prepare: prepare.yml
+    converge: playbook.yml
 scenario:
   name: default
