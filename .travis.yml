@@ -24,7 +24,7 @@ env:
     # - namespace="opensuse/" image="leap"
     # - image="docker-ubuntu-systemd" tag="rolling"
     # - image="docker-ubuntu-systemd" tag="devel"
-    #- image="docker-ubuntu-systemd"
+    # - image="docker-ubuntu-systemd"
 
 matrix:
   allow_failures:
