@@ -9,10 +9,10 @@ galaxy_info:
 
   platforms:
     - name: ArchLinux
-      version:
+      versions:
         - all
     - name: EL
-      version:
+      versions:
         - 8
     - name: Fedora
       versions:
