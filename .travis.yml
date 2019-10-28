@@ -13,7 +13,6 @@ env:
   matrix:
     # - namespace="archlinux" image="base"
     - image="centos"
-    - image="redhat"
     - image="fedora"
     - image="fedora" tag="rawhide"
 
