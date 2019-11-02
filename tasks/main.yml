@@ -13,8 +13,6 @@
     name: "{{ stratis_service }}"
     state: started
     enabled: yes
-  when:
-    - ansible_virtualization_type != "docker"
 
 - name: create pools
   command: stratis pool create {{ item.name }} {{ item.devices | join(' ') }}
@@ -24,7 +22,6 @@
     - "{{ stratis_pools }}"
   when:
     - stratis_pools is defined
-    - ansible_virtualization_type != "docker"
   loop_control:
     label: "{{ item.name }}"
 
@@ -36,7 +33,6 @@
     - "{{ stratis_filesystems }}"
   when:
     - stratis_filesystems is defined
-    - ansible_virtualization_type != "docker"
   loop_control:
     label: "{{ item.name }}"
 
@@ -62,6 +58,5 @@
     - "{{ stratis_mounts }}"
   when:
     - stratis_mounts is defined
-    - ansible_virtualization_type != "docker"
   loop_control:
     label: "{{ item.mountpoint }}"
