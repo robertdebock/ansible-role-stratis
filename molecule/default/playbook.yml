@@ -6,14 +6,14 @@
 
   roles:
     - role: ansible-role-stratis
-      stratis_pools:
-        - name: my_pool
-          devices:
-            - /dev/vdb
-            - /dev/vdc
-      stratis_filesystems:
-        - name: my_filesystem
-          pool: my_pool
-      stratis_mounts:
-        - mountpoint: /mnt/my_mountpoint
-          device: /stratis/my_pool/my_filesystem
+      # stratis_pools:
+      #   - name: my_pool
+      #     devices:
+      #       - /dev/vdb
+      #       - /dev/vdc
+      # stratis_filesystems:
+      #   - name: my_filesystem
+      #     pool: my_pool
+      # stratis_mounts:
+      #   - mountpoint: /mnt/my_mountpoint
+      #     device: /stratis/my_pool/my_filesystem
