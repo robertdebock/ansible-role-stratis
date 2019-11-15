@@ -2,7 +2,7 @@ stratis
 =========
 
 <img src="https://docs.ansible.com/ansible-tower/3.2.4/html_ja/installandreference/_static/images/logo_invert.png" width="10%" height="10%" alt="Ansible logo" align="right"/>
-<a href="https://travis-ci.org/robertdebock/ansible-role-stratis"> <img src="https://travis-ci.org/robertdebock/ansible-role-stratis.svg?branch=master" alt="Build status"/></a> <img src="https://img.shields.io/ansible/role/d/"/> <img src="https://img.shields.io/ansible/quality/"/>
+<a href="https://travis-ci.org/robertdebock/ansible-role-stratis"> <img src="https://travis-ci.org/robertdebock/ansible-role-stratis.svg?branch=master" alt="Build status"/></a> <img src="https://img.shields.io/ansible/role/d/40309"/> <img src="https://img.shields.io/ansible/quality/40309"/>
 
 Install stratis and carves pools and filesystems.
 
@@ -17,19 +17,21 @@ This example is taken from `molecule/resources/playbook.yml`:
   become: yes
   gather_facts: yes
 
+  # vars:
+  #   stratis_pools:
+  #     - name: my_pool
+  #       devices:
+  #         - /dev/vdb
+  #         - /dev/vdc
+  #   stratis_filesystems:
+  #     - name: my_filesystem
+  #       pool: my_pool
+  #   stratis_mounts:
+  #     - mountpoint: /mnt/my_mountpoint
+  #       device: /stratis/my_pool/my_filesystem
+
   roles:
     - role: robertdebock.stratis
-      # stratis_pools:
-      #   - name: my_pool
-      #     devices:
-      #       - /dev/vdb
-      #       - /dev/vdc
-      # stratis_filesystems:
-      #   - name: my_filesystem
-      #     pool: my_pool
-      # stratis_mounts:
-      #   - mountpoint: /mnt/my_mountpoint
-      #     device: /stratis/my_pool/my_filesystem
 ```
 
 The machine you are running this on, may need to be prepared.

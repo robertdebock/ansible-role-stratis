@@ -3,6 +3,7 @@
 stratis_packages:
   - stratisd
   - stratis-cli
+  - systemd-udev
   - xfsprogs
 
 stratis_service: stratisd
