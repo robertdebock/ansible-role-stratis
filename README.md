@@ -166,7 +166,6 @@ Some variarations of the build matrix do not work. These are the variations and 
 | Ubuntu | Stratis is not available. |
 
 
-
 Testing
 -------
 
