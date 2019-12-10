@@ -98,7 +98,7 @@ After running this role, this playbook runs to verify that everything works, thi
   tasks:
     - name: stratis version
       command: stratis --version
-
+```
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
@@ -140,17 +140,17 @@ Compatibility
 
 This role has been tested on these [container images](https://hub.docker.com/):
 
-|container|tag|allow_failures|
-|---------|---|--------------|
-|centos|latest|no|
-|fedora|latest|no|
-|fedora|rawhide|yes|
+|container|tags|
+|---------|----|
+|archlinux|all|
+|el|8|
+|fedora|all|
 
-This role has been tested on these Ansible versions:
+The minimum version of Ansible required is 2.8 but tests have been done to:
 
-- ansible>=2.8, <2.9
-- ansible>=2.9
-- git+https://github.com/ansible/ansible.git@devel
+- The previous version, on version lower.
+- The current version.
+- The development version.
 
 Exceptions
 ----------
@@ -199,19 +199,6 @@ tox
 image="centos" tox
 # Or customize more:
 image="debian" tag="stable" tox
-```
-
-Modules
--------
-
-This role uses the following modules:
-```yaml
----
-- command
-- file
-- mount
-- package
-- service
 ```
 
 License
