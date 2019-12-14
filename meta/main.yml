@@ -22,6 +22,5 @@ galaxy_info:
     - stratis
     - storage
     - centos
-    - rhel
 
 dependencies: []
