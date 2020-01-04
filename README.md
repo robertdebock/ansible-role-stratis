@@ -4,6 +4,8 @@ stratis
 <img src="https://docs.ansible.com/ansible-tower/3.2.4/html_ja/installandreference/_static/images/logo_invert.png" width="10%" height="10%" alt="Ansible logo" align="right"/>
 <a href="https://travis-ci.org/robertdebock/ansible-role-stratis"> <img src="https://travis-ci.org/robertdebock/ansible-role-stratis.svg?branch=master" alt="Build status"/></a> <img src="https://img.shields.io/ansible/role/d/40309"/> <img src="https://img.shields.io/ansible/quality/40309"/>
 
+<a href="https://github.com/robertdebock/ansible-role-stratis/actions"><img src="https://github.com/robertdebock/ansible-role-stratis/workflows/GitHub%20Action/badge.svg"/></a>
+
 Install stratis and carves pools and filesystems.
 
 Example Playbook
@@ -141,7 +143,6 @@ This role has been tested on these [container images](https://hub.docker.com/):
 
 |container|tags|
 |---------|----|
-|archlinux|all|
 |el|8|
 |fedora|all|
 
