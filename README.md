@@ -61,8 +61,7 @@ The machine you are running this on, may need to be prepared, I use this playboo
       command: dd if=/dev/zero of=/{{ item.name }} bs=1M count=1K
       args:
         creates: "/{{ item.name }}"
-      with_items:
-        - "{{ devices }}"
+      loop: "{{ devices }}"
       notify:
         - create loopback device
         - loopback device to storage file
@@ -72,15 +71,13 @@ The machine you are running this on, may need to be prepared, I use this playboo
   handlers:
     - name: create loopback device
       command: mknod /dev/{{ item.name }} b {{ item.major }} {{ item.minor }}
-      with_items:
-        - "{{ devices }}"
+      loop: "{{ devices }}"
       loop_control:
         label: "/dev/{{ item.name }}"
 
     - name: loopback device to storage file
       command: losetup /dev/{{ item.name }} /{{ item.name }}
-      with_items:
-        - "{{ devices }}"
+      loop: "{{ devices }}"
       failed_when: no
       register: stratis_loopback_device_to_storage_file
       until: stratis_loopback_device_to_storage_file is succeeded
