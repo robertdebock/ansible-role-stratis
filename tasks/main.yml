@@ -18,8 +18,7 @@
   command: stratis pool create {{ item.name }} {{ item.devices | join(' ') }}
   args:
     creates: /stratis/{{ item.name }}
-  with_items:
-    - "{{ stratis_pools }}"
+  loop: "{{ stratis_pools }}"
   when:
     - stratis_pools is defined
   loop_control:
@@ -29,8 +28,7 @@
   command: stratis fs create {{ item.pool }} {{ item.name }}
   args:
     creates: /stratis/{{ item.pool }}/{{ item.name }}
-  with_items:
-    - "{{ stratis_filesystems }}"
+  loop: "{{ stratis_filesystems }}"
   when:
     - stratis_filesystems is defined
   loop_control:
@@ -41,8 +39,7 @@
     path: "{{ item.mountpoint }}"
     state: directory
     recurse: yes
-  with_items:
-    - "{{ stratis_mounts }}"
+  loop: "{{ stratis_mounts }}"
   when:
     - stratis_mounts is defined
   loop_control:
@@ -54,8 +51,7 @@
     src: "{{ item.device }}"
     fstype: xfs
     state: present
-  with_items:
-    - "{{ stratis_mounts }}"
+  loop: "{{ stratis_mounts }}"
   when:
     - stratis_mounts is defined
   loop_control:
