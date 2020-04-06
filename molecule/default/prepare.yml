@@ -14,7 +14,7 @@
         minor: 3
 
   roles:
-    - robertdebock.bootstrap
+    - role: robertdebock.bootstrap
 
   tasks:
     - name: create storage file

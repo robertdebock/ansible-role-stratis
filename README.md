@@ -51,7 +51,7 @@ The machine may need to be prepared using `molecule/resources/prepare.yml`:
         minor: 3
 
   roles:
-    - robertdebock.bootstrap
+    - role: robertdebock.bootstrap
 
   tasks:
     - name: create storage file
