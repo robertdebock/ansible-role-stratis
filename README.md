@@ -2,9 +2,9 @@
 
 Install stratis and carves pools and filesystems.
 
-|Travis|GitHub|Quality|Downloads|
-|------|------|-------|---------|
-|[![travis](https://travis-ci.com/robertdebock/ansible-role-stratis.svg?branch=master)](https://travis-ci.com/robertdebock/ansible-role-stratis)|[![github](https://github.com/robertdebock/ansible-role-stratis/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-stratis/actions)|[![quality](https://img.shields.io/ansible/quality/40309)](https://galaxy.ansible.com/robertdebock/stratis)|[![downloads](https://img.shields.io/ansible/role/d/40309)](https://galaxy.ansible.com/robertdebock/stratis)|
+|Travis|GitHub|Quality|Downloads|Version|
+|------|------|-------|---------|-------|
+|[![travis](https://travis-ci.com/robertdebock/ansible-role-stratis.svg?branch=master)](https://travis-ci.com/robertdebock/ansible-role-stratis)|[![github](https://github.com/robertdebock/ansible-role-stratis/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-stratis/actions)|[![quality](https://img.shields.io/ansible/quality/40309)](https://galaxy.ansible.com/robertdebock/stratis)|[![downloads](https://img.shields.io/ansible/role/d/40309)](https://galaxy.ansible.com/robertdebock/stratis)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-stratis.svg)](https://github.com/robertdebock/ansible-role-stratis/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
