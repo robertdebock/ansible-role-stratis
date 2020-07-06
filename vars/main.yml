@@ -1,5 +1,6 @@
 ---
 # vars file for stratis
+
 stratis_packages:
   - stratisd
   - stratis-cli
