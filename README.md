@@ -76,9 +76,6 @@ The machine may need to be prepared using `molecule/resources/prepare.yml`:
       command: losetup /dev/{{ item.name }} /{{ item.name }}
       loop: "{{ devices }}"
       failed_when: no
-      register: stratis_loopback_device_to_storage_file
-      until: stratis_loopback_device_to_storage_file is succeeded
-      retries: 3
       loop_control:
         label: "/dev/{{ item.name }} to /{{ item.name }}"
 ```
