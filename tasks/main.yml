@@ -4,9 +4,6 @@
   package:
     name: "{{ stratis_packages }}"
     state: present
-  register: stratis_install_stratis
-  until: stratis_install_stratis is succeeded
-  retries: 3
 
 - name: start and enable stratis
   service:
