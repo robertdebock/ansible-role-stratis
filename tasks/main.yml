@@ -36,6 +36,7 @@
     path: "{{ item.mountpoint }}"
     state: directory
     recurse: yes
+    mode: "0755"
   loop: "{{ stratis_mounts }}"
   when:
     - stratis_mounts is defined
