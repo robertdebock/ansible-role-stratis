@@ -1,5 +1,6 @@
 ---
 # tasks file for stratis
+
 - name: install stratis
   package:
     name: "{{ stratis_packages }}"
