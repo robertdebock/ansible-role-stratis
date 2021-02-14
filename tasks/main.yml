@@ -2,12 +2,12 @@
 # tasks file for stratis
 
 - name: install stratis
-  package:
+  ansible.builtin.package:
     name: "{{ stratis_packages }}"
     state: present
 
 - name: start and enable stratis
-  service:
+  ansible.builtin.service:
     name: "{{ stratis_service }}"
     state: started
     enabled: yes
@@ -33,7 +33,7 @@
     label: "{{ item.name }}"
 
 - name: create mountpoint
-  file:
+  ansible.builtin.file:
     path: "{{ item.mountpoint }}"
     state: directory
     recurse: yes
@@ -45,7 +45,7 @@
     label: "{{ item.mountpoint }}"
 
 - name: mount filesystems
-  mount:
+  ansible.posix.mount:
     path: "{{ item.mountpoint }}"
     src: "{{ item.device }}"
     fstype: xfs
