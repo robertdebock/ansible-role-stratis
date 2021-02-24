@@ -4,7 +4,7 @@ Install stratis and carves pools and filesystems.
 
 |GitHub|GitLab|Quality|Downloads|Version|
 |------|------|-------|---------|-------|
-|[![github](https://github.com/robertdebock/ansible-role-stratis/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-stratis/actions)|[![gitlab](https://gitlab.com/robertdebock/ansible-role-stratis/badges/master/pipeline.svg)](https://gitlab.com/robertdebock/ansible-role-stratis)|[![quality](https://img.shields.io/ansible/quality/40309)](https://galaxy.ansible.com/robertdebock/stratis)|[![downloads](https://img.shields.io/ansible/role/d/40309)](https://galaxy.ansible.com/robertdebock/stratis)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-stratis.svg)](https://github.com/robertdebock/ansible-role-stratis/releases/)|
+|[![github](https://github.com/robertdebock/ansible-role-stratis/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-stratis/actions)|[![gitlab](https://gitlab.com/robertdebock/ansible-role-stratis/badges/master/pipeline.svg)](https://gitlab.com/robertdebock/ansible-role-stratis)|[![quality](https://img.shields.io/ansible/quality/)](https://galaxy.ansible.com/robertdebock/stratis)|[![downloads](https://img.shields.io/ansible/role/d/)](https://galaxy.ansible.com/robertdebock/stratis)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-stratis.svg)](https://github.com/robertdebock/ansible-role-stratis/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
