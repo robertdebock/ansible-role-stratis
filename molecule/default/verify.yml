@@ -6,4 +6,5 @@
 
   tasks:
     - name: stratis version
-      command: stratis --version
+      ansible.builtin.command:
+        cmd: stratis --version
