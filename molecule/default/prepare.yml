@@ -29,11 +29,13 @@
         label: "/{{ item.name }}"
 
   handlers:
+
     - name: create loopback device
       command: mknod /dev/{{ item.name }} b {{ item.major }} {{ item.minor }}
       loop: "{{ devices }}"
       loop_control:
         label: "/dev/{{ item.name }}"
+      changed_when: no
 
     - name: loopback device to storage file
       command: losetup /dev/{{ item.name }} /{{ item.name }}
@@ -41,3 +43,4 @@
       failed_when: no
       loop_control:
         label: "/dev/{{ item.name }} to /{{ item.name }}"
+      changed_when: no
