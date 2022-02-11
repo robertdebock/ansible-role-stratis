@@ -4,18 +4,18 @@
   become: yes
   gather_facts: yes
 
-  # vars:
-  #   stratis_pools:
-  #     - name: my_pool
-  #       devices:
-  #         - /dev/vdb
-  #         - /dev/vdc
-  #   stratis_filesystems:
-  #     - name: my_filesystem
-  #       pool: my_pool
-  #   stratis_mounts:
-  #     - mountpoint: /mnt/my_mountpoint
-  #       device: /stratis/my_pool/my_filesystem
-
   roles:
     - role: ansible-role-stratis
+  # It's not easy to test block-devices in CI. That's why the next block
+  # of variables is commented, but left here as an example.
+  #    stratis_pools:
+  #      - name: my_pool
+  #        devices:
+  #          - /dev/vdb
+  #          - /dev/vdc
+  #    stratis_filesystems:
+  #      - name: my_filesystem
+  #        pool: my_pool
+  #    stratis_mounts:
+  #      - mountpoint: /mnt/my_mountpoint
+  #        device: /stratis/my_pool/my_filesystem

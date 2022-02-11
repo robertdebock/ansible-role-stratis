@@ -16,21 +16,21 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
   become: yes
   gather_facts: yes
 
-  # vars:
-  #   stratis_pools:
-  #     - name: my_pool
-  #       devices:
-  #         - /dev/vdb
-  #         - /dev/vdc
-  #   stratis_filesystems:
-  #     - name: my_filesystem
-  #       pool: my_pool
-  #   stratis_mounts:
-  #     - mountpoint: /mnt/my_mountpoint
-  #       device: /stratis/my_pool/my_filesystem
-
   roles:
     - role: robertdebock.stratis
+  # It's not easy to test block-devices in CI. That's why the next block
+  # of variables is commented, but left here as an example.
+  #    stratis_pools:
+  #      - name: my_pool
+  #        devices:
+  #          - /dev/vdb
+  #          - /dev/vdc
+  #    stratis_filesystems:
+  #      - name: my_filesystem
+  #        pool: my_pool
+  #    stratis_mounts:
+  #      - mountpoint: /mnt/my_mountpoint
+  #        device: /stratis/my_pool/my_filesystem
 ```
 
 The machine needs to be prepared. In CI this is done using `molecule/default/prepare.yml`:
@@ -43,10 +43,10 @@ The machine needs to be prepared. In CI this is done using `molecule/default/pre
 
   vars:
     devices:
-      - name: vdb
+      - name: vdc
         major: 252
         minor: 2
-      - name: vdc
+      - name: vdd
         major: 252
         minor: 3
 
@@ -66,7 +66,6 @@ The machine needs to be prepared. In CI this is done using `molecule/default/pre
         label: "/{{ item.name }}"
 
   handlers:
-
     - name: create loopback device
       command: mknod /dev/{{ item.name }} b {{ item.major }} {{ item.minor }}
       loop: "{{ devices }}"

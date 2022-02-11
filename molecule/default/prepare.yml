@@ -6,10 +6,10 @@
 
   vars:
     devices:
-      - name: vdb
+      - name: vdc
         major: 252
         minor: 2
-      - name: vdc
+      - name: vdd
         major: 252
         minor: 3
 
@@ -29,7 +29,6 @@
         label: "/{{ item.name }}"
 
   handlers:
-
     - name: create loopback device
       command: mknod /dev/{{ item.name }} b {{ item.major }} {{ item.minor }}
       loop: "{{ devices }}"
