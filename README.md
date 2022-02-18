@@ -119,18 +119,6 @@ The minimum version of Ansible required is 2.10, tests have been done to:
 - The current version.
 - The development version.
 
-## [Exceptions](#exceptions)
-
-Some roles can't run on a specific distribution or version. Here are some exceptions.
-
-| variation                 | reason                 |
-|---------------------------|------------------------|
-| Alpine | Stratis is not available. |
-| CentOS-7 | Stratis is not available. |
-| Debian | Stratis is not available. |
-| openSUSE Leap | Stratis is not available. |
-| Ubuntu | Stratis is not available. |
-
 
 If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-stratis/issues)
 
