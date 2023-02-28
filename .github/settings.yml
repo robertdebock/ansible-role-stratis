@@ -5,4 +5,4 @@
 repository:
   description: Install stratis and carves pools and filesystems.
   homepage: https://robertdebock.nl/
-  topics: stratis, storage, ansible, molecule, tox, playbook, hacktoberfest
+  topics: stratis, storage, ansible, molecule, tox, playbook
