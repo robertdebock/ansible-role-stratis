@@ -5,6 +5,6 @@
   gather_facts: no
 
   tasks:
-    - name: stratis version
+    - name: Stratis version
       ansible.builtin.command:
         cmd: stratis --version

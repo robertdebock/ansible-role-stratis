@@ -1,5 +1,5 @@
 ---
-- name: prepare
+- name: Prepare
   hosts: all
   become: yes
   gather_facts: no
@@ -17,27 +17,29 @@
     - role: robertdebock.bootstrap
 
   tasks:
-    - name: create storage file
-      command: dd if=/dev/zero of=/{{ item.name }} bs=1M count=1K
+    - name: Create storage file
+      ansible.builtin.command: dd if=/dev/zero of=/{{ item.name }} bs=1M count=1K
       args:
         creates: "/{{ item.name }}"
       loop: "{{ devices }}"
       notify:
-        - create loopback device
-        - loopback device to storage file
+        - Create loopback device
+        - Loopback device to storage file
       loop_control:
         label: "/{{ item.name }}"
 
   handlers:
-    - name: create loopback device
-      command: mknod /dev/{{ item.name }} b {{ item.major }} {{ item.minor }}
+    - name: Create loopback device
+      ansible.builtin.command:
+        cmd: mknod /dev/{{ item.name }} b {{ item.major }} {{ item.minor }}
       loop: "{{ devices }}"
       loop_control:
         label: "/dev/{{ item.name }}"
       changed_when: no
 
-    - name: loopback device to storage file
-      command: losetup /dev/{{ item.name }} /{{ item.name }}
+    - name: Loopback device to storage file
+      ansible.builtin.command:
+        cmd: losetup /dev/{{ item.name }} /{{ item.name }}
       loop: "{{ devices }}"
       failed_when: no
       loop_control:
