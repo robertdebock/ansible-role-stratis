@@ -1,4 +1,4 @@
-# Ansible role [stratis](#stratis)
+# [Ansible role stratis](#stratis)
 
 Install stratis and carves pools and filesystems.
 
