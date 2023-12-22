@@ -1,5 +1,7 @@
 # [Ansible role stratis](#stratis)
 
+> THIS ROLE HAS BEEN ARCHIVED AS OF DEC 2023.
+
 Install stratis and carves pools and filesystems.
 
 |GitHub|GitLab|Downloads|Version|
